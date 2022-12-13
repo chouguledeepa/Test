@@ -20,6 +20,8 @@ if __name__ == '__main__':
         "edited": "2014-12-20T21:17:56.891000Z",
         "url": "https://swapi.dev/api/people/1/"
     }
+    breakpoint()
+
     obj = Base(**data)
     print(obj.created)
     print(type(obj.created))
