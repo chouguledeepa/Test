@@ -1,3 +1,42 @@
+# """
+# 42 elements - 11.75 seconds with 3 processes (multi-processing)
+# 42 elements - 7.3 seconds with 8 processes (multi-processing)
+# """
+#
+# import time
+#
+#
+# # generic decorator
+# def timeit(func):
+#     def wrapper(*args, **kwargs):
+#         # pre-processing
+#         start = time.time()
+#         result = func(*args, **kwargs)
+#         # post-processing
+#         print(f"[ INFO ] time to execute - {time.time() - start}")
+#         return result
+#
+#     return wrapper
+#
+#
+# def compute_intensive_work(range_):
+#     result = [i ** 3 for i in range(range_)]
+#     return result
+#
+#
+# @timeit
+# def main():
+#     large_number_range = [2000000, 2000000, 2000000, 2000000, 2000000, 2000000]
+#
+#
+#     import multiprocessing
+#     pool_ = multiprocessing.Pool(8)
+#     pool_.map(compute_intensive_work, large_number_range)
+#
+#
+# if __name__ == "__main__":
+#     main()
+#     breakpoint()
 """
 pip install pymysql
 pip install cryptography
@@ -6,55 +45,33 @@ CREATE USER adam@localhost IDENTIFIED BY 'qwerty@123';
 GRANT ALL PRIVILEGES ON *.* TO adam WITH GRANT OPTION;
 SHOW GRANTS FOR adam;
 """
-#
-# import pymysql
-# # connection to database
-# connection = pymysql.connect(
-#     host='localhost',
-#     user='root',
-#     password='Deeps@sql139',
-#     database='starwarsDB'
-#  )
-#
-#
-# cursor = connection.cursor()
-# sql = "select * from starwarsDB.species_sample;"
-# result = cursor.execute(sql)
-# print(result)
 
-"""
-pip install pymysql
-pip install cryptography
-# if you want to create new user and want to grant to root permissions to him
-CREATE USER adam@localhost IDENTIFIED BY 'qwerty@123';
-GRANT ALL PRIVILEGES ON *.* TO adam WITH GRANT OPTION;
-SHOW GRANTS FOR adam;
-"""
-
-import yaml
-import toml
 import pymysql
 from typing import List
 
 
+# connection to database
+connection = pymysql.connect(
+    host='localhost',
+    user='adam',
+    password='qwerty@123',
+    database='starwarsDB'
+ )
+
+cursor = connection.cursor()
+sql = "select * from starwarsDB.species_sample;"
+result = cursor.execute(sql)
+
+
 def get_db_conn():
-
-    filepath = "settings/secrets.yaml"
-    with open(filepath, "r") as foo:
-        doc = yaml.load(foo, Loader=yaml.FullLoader)
-        connection_ = pymysql.connect(**doc)
-        return connection_
-
-
-def get_db_conn_toml():
-
-    toml_path = "settings/secrets.toml"
-
-    with open(toml_path, "r") as foo:
-        config = toml.load(foo)
-        dbconfig = config.get("mysqldb")
-        connection_ = pymysql.connect(**dbconfig)
-        return connection_
+    # connection to database
+    connection_ = pymysql.connect(
+        host='localhost',
+        user='adam',
+        password='qwerty@123',
+        database='starwarsDB'
+    )
+    return connection_
 
 
 def insert_resource(
@@ -97,9 +114,3 @@ def insert_resource(
         result = cursor.execute(sql_magic)
         conn.commit()
     return result
-
-
-if __name__ == "__main__":
-    yaml_conn = get_db_conn()
-    toml_conn = get_db_conn_toml()
-    breakpoint()
