@@ -6,6 +6,7 @@ def timeit(func):
         start = time.time()
         result = func(*args, **kwargs)
         end = time.time() - start
-        print(f"Total time to execute - {end}")
+        print(f"total time to execute - {end}")
         return result
+
     return wrapper

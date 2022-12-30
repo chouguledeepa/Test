@@ -1,39 +1,41 @@
 from resources.base import ResourceBase
-from utils.fetch_data import fetch_data
+from utils.fetch_data import hit_url
 
 
-class Films(ResourceBase):
+class Film(ResourceBase):
     """
-    Resource class plural
+    Planet class related functionality
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
-        self.__relative_url = "api/films/"  # plural
-        self.__films_range = [1, 6]
+        self.__relative_url = "/api/films"
 
     @property
-    def range(self):
-        return self.__films_range
+    def relative_url(self):
+        return self.__relative_url
 
-    # def films_range(self, start, end):
-    #     self.__films_range = [start, end]
-
-    @range.setter
-    def range(self, range):
-        start, end = range
-        self.__films_range = [start, end]
+    @relative_url.setter
+    def relative_url(self, new_url_):
+        self.__relative_url = new_url_
 
     def get_count(self):
-        plural_films_url = self.home_url + self.__relative_url
-        response = fetch_data(plural_films_url)
-        return response.get("count")
+        complete_url = self.home_url + self.relative_url
+        response = hit_url(complete_url)
+        data = response.json()
+        count = data.get("count")
+        return count
 
-    def get_resource_urls(self):
-        resource_url = self.home_url + self.__relative_url
-        return resource_url
+    def get_sample_data(self, id_=1):
+        complete_url = self.home_url + self.relative_url + f"/{id_}"
+        response = hit_url(complete_url)
+        data = response.json()
+        return data
 
-# f = Films()
-# print(f.films_range)
-# f.films_range = 2, 10
-# print(f.films_range)
+
+if __name__ == "__main__":
+    p = Film()
+    url = p.relative_url
+    print(url)
+    planet_count = p.get_count()
+    print(planet_count)

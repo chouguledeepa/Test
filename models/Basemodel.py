@@ -1,7 +1,10 @@
 """
 this model shows another pyndatic model resources aka datamodels
 
+This module defines a pydantic basemodel to be used by another
+pydantic models (resource models aka "datamodels")
 """
+
 from  pydantic import BaseModel
 from  datetime import datetime
 

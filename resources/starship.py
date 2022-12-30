@@ -1,37 +1,41 @@
 from resources.base import ResourceBase
-from utils.fetch_data import fetch_data
+from utils.fetch_data import hit_url
 
 
-
-
-
-
-class Starships(ResourceBase):
+class Spaceship(ResourceBase):
     """
-    Resource class plural
+    Planet class related functionality
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
-        self.__relative_url = "api/starships/"  # plural
-        self.__starships_range = [1, 36]
+        self.__relative_url = "/api/starships"
 
     @property
-    def range(self):
-        return self.__starships_range
+    def relative_url(self):
+        return self.__relative_url
 
-    @range.setter
-    def range(self, new_range):
-        self.__starships_range = new_range
+    @relative_url.setter
+    def relative_url(self, new_url_):
+        self.__relative_url = new_url_
 
     def get_count(self):
-        plural_starships_url = self.home_url+self.__relative_url
-        response = fetch_data(plural_starships_url)
-        return response.get("count")
+        complete_url = self.home_url + self.__relative_url
+        response = hit_url(complete_url)
+        data = response.json()
+        count = data.get("count")
+        return count
 
-    def get_resource_urls(self):
+    def get_sample_data(self):
+        complete_url = self.home_url + self.__relative_url + "/1"
+        response = hit_url(complete_url)
+        data = response.json()
+        return data
 
-        resource_url = self.home_url + self.__relative_url
-        return resource_url
 
-
+if __name__ == "__main__":
+    p = Spaceship()
+    url = p.relative_url
+    print(url)
+    planet_count = p.get_count()
+    print(planet_count)

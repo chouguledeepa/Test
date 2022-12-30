@@ -19,6 +19,7 @@ def timeit(func):
         # post-processing
         print(f"[ INFO ] time to execute - {time.time() - start}")
         return result
+
     return wrapper
 
 
@@ -52,6 +53,7 @@ def main(characters):
 
     # create thread-pool
     from multiprocessing.pool import ThreadPool
+
     pool_size = 15
     pool = ThreadPool(pool_size)
 

@@ -16,6 +16,7 @@ def timeit(func):
         # post-processing
         print(f"[ INFO ] time to execute - {time.time() - start}")
         return result
+
     return wrapper
 
 
@@ -26,10 +27,53 @@ def compute_intensive_work(range_):
 
 @timeit
 def main():
-    large_number_range = [2000000, 2000000, 2000000, 2000000, 2000000, 2000000,]
-
+    large_number_range = [
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+    ]
 
     import multiprocessing
+
     pool_ = multiprocessing.Pool(20)
     pool_.map(compute_intensive_work, large_number_range)
 

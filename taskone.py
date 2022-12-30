@@ -1,4 +1,4 @@
-from utils.randgen import RandomCharacters
+from utils.randgen import ProduceChars
 from utils.fetch_data import fetch_data
 
 home_url = "https://swapi.dev"  # swapi website
@@ -10,7 +10,7 @@ def do_task_one():
     get details from 15 random characters from [1 to 82]
     :return:
     """
-    for character in RandomCharacters():  # generating random character from
+    for character in ProduceChars():  # generating random character from
         # RandomCharacter generator
 
         absolute_url = home_url + relative_url.format(

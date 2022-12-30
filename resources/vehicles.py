@@ -1,30 +1,41 @@
 from resources.base import ResourceBase
-from utils.fetch_data import fetch_data
+from utils.fetch_data import hit_url
 
 
-class Vehicles(ResourceBase):
+class Vehicle(ResourceBase):
     """
-    Resource class plural
+    Planet class related functionality
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
-        self.__relative_url = "api/vehicles/"  # plural
-        self.__vehicles_range = [1, 39]
+        self.__relative_url = "/api/vehicles"
 
     @property
-    def range(self):
-        return self.__vehicles_range
+    def relative_url(self):
+        return self.__relative_url
 
-    @range.setter
-    def range(self, new_range):
-        self.__vehicles_range = new_range
+    @relative_url.setter
+    def relative_url(self, new_url_):
+        self.__relative_url = new_url_
 
     def get_count(self):
-        plural_vehicles_url = self.home_url+self.__relative_url
-        response = fetch_data(plural_vehicles_url)
-        return response.get("count")
+        complete_url = self.home_url + self.__relative_url
+        response = hit_url(complete_url)
+        data = response.json()
+        count = data.get("count")
+        return count
 
-    def get_resource_urls(self):
-        resource_url = self.home_url + self.__relative_url
-        return resource_url
+    def get_sample_data(self):
+        complete_url = self.home_url + self.__relative_url + "/1"
+        response = hit_url(complete_url)
+        data = response.json()
+        return data
+
+
+if __name__ == "__main__":
+    p = Vehicle()
+    url = p.relative_url
+    print(url)
+    planet_count = p.get_count()
+    print(planet_count)

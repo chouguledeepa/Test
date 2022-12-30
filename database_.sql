@@ -6,7 +6,7 @@ USE starwarsDB;
 /*create tables */
 
 CREATE TABLE `species`(
-    `species_id` INT(11) NOT NULL,
+    `species_id` INT(11) NOT NULL AUTO_INCREMENT,
     `average_height` VARCHAR(250) COLLATE 'utf8_unicode_ci',
     `average_lifespan` VARCHAR(250) COLLATE 'utf8_unicode_ci',
     `classification` VARCHAR(250) COLLATE 'utf8_unicode_ci',
@@ -24,7 +24,7 @@ CREATE TABLE `species`(
 
 
 CREATE TABLE `characters` (
-    `char_id` INT(11) NOT NULL,
+    `char_id` INT(11) NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(250) COLLATE 'utf8_unicode_ci',
     `height` VARCHAR(250) COLLATE 'utf8_unicode_ci',
     `mass` VARCHAR(250) COLLATE 'utf8_unicode_ci',
@@ -47,7 +47,7 @@ CREATE TABLE `characters` (
 
 CREATE TABLE `film` (
 
-    `film_id` INT(11) NOT NULL,
+    `film_id` INT(11) NOT NULL AUTO_INCREMENT,
     `title` VARCHAR(250) COLLATE 'utf8_unicode_ci',
     `episode_id` VARCHAR(250) COLLATE 'utf8_unicode_ci',
     `opening_crawl` VARCHAR(2000) COLLATE 'utf8_unicode_ci',
@@ -68,7 +68,7 @@ CREATE TABLE `film` (
 
 CREATE TABLE `vehicle`(
 
-    `vehicle_id` INT(11) NOT NULL,
+    `vehicle_id` INT(11) NOT NULL AUTO_INCREMENT,
     `cargo_capacity` VARCHAR(250) COLLATE 'utf8_unicode_ci',
     `consumables` VARCHAR(250) COLLATE 'utf8_unicode_ci',
     `cost_in_credits` VARCHAR(250) COLLATE 'utf8_unicode_ci',
@@ -91,7 +91,7 @@ CREATE TABLE `vehicle`(
 
 CREATE TABLE `starship`(
 
-    `starship_id` INT(11) NOT NULL,
+    `starship_id` INT(11) NOT NULL AUTO_INCREMENT,
     `MGLT` VARCHAR(250) COLLATE 'utf8_unicode_ci',
     `cargo_capacity` VARCHAR(250) COLLATE 'utf8_unicode_ci',
     `consumables` VARCHAR(250) COLLATE 'utf8_unicode_ci',
@@ -116,7 +116,7 @@ CREATE TABLE `starship`(
 
 CREATE TABLE `planet`(
 
-    `planet_id` INT(11) NOT NULL,
+    `planet_id` INT(11) NOT NULL AUTO_INCREMENT,
     `climate` VARCHAR(250) COLLATE 'utf8_unicode_ci',
     `diameter` VARCHAR(250) COLLATE 'utf8_unicode_ci',
     `gravity` VARCHAR(250) COLLATE 'utf8_unicode_ci',
@@ -219,4 +219,3 @@ CREATE TABLE `FilmSpeciesRelation`(
 /*.
 DEFAULT CHARSET=utf8mb4 based on random recommendation found on the internet
 https://www.eversql.com/mysql-utf8-vs-utf8mb4-whats-the-difference-between-utf8-and-utf8mb4/
-*/
